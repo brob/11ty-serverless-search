@@ -1,0 +1,15 @@
+---
+layout: "base.html"
+title: Search Page
+permalink:
+  search: /search/
+---
+
+<h2 class="is-size-3 mb-3">This list is built at request from the query "{{ eleventy.serverless.query.query }}"</h2>
+<h3 class="is-size-4 mb-5">It uses <em>ALSO</em> <code class="is-inline-block">{% raw %}{% include "article.html" %}{% endraw %}</code> for the articles.</h3>
+{% assign results = eleventy.serverless.query.query | getResults %}
+<div class="card-grid">
+  {% for result in results %}
+    {% include "article.html" with { "article": result } %}
+  {% endfor %}
+</div>

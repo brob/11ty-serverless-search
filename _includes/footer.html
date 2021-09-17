@@ -1,0 +1,66 @@
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>11ty Serverless Search Experiment by <a href="https://twitter.com/brob/">Bryan Robinson</a></p>
+    <p>Built with <a href="https://algolia.com">Algolia</a>, <a href="https://netlify.com">Netlify</a>, and <a href="https://11ty.dev">11ty</a>.</p>
+  </div>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.5.1/dist/algoliasearch-lite.umd.js" integrity="sha256-EXPXz4W6pQgfYY3yTpnDa3OH8/EPn16ciVsPQ/ypsjk=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.8.3/dist/instantsearch.production.min.js" integrity="sha256-LAGhRRdtVoD6RLo2qDQsU2mp+XVSciKRC8XPOBWmofM=" crossorigin="anonymous"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@algolia/autocomplete-theme-classic"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/preact/dist/preact.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/preact/dist/preact.min.js"></script>
+
+    <script>
+    const { autocomplete, getAlgoliaResults } = window['@algolia/autocomplete-js'];
+   
+    
+const searchClient = algoliasearch(
+  'DM3RZH4ZSK',
+  '36fc36bcb1cc6c88b3c5c1689ec57250'
+);
+// document.querySelector('#autocomplete > form').classList.add('hide');
+const autocompleteSearch = autocomplete({
+  container: '#autocomplete',
+  getSources() {
+    return [
+      {
+        sourceId: 'querySuggestions',
+        getItemInputValue: ({ item }) => item.query,
+        getItems({ query }) {
+          return getAlgoliaResults({
+            searchClient,
+            queries: [
+              {
+                indexName: 'blog_search',
+                query,
+                params: {
+                  hitsPerPage: 4,
+                },
+              },
+            ],
+          });
+        },
+        templates: {
+        item({ item, components, createElement, Fragment }) {
+            return createElement("a", {href: item.url}, item.title);
+        },
+
+        },
+      },
+    ];
+  },
+});
+    
+    
+    
+    </script>
+
+
+</body>
+</html>

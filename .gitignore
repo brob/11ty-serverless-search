@@ -1,0 +1,5 @@
+_site
+netlify/functions/search/**
+!netlify/functions/search/index.js
+.env
+node_modules
