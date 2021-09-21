@@ -1,8 +1,9 @@
+require("dotenv").config();
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 const algoliasearch = require("algoliasearch");
 
-const client = algoliasearch("DM3RZH4ZSK", "36fc36bcb1cc6c88b3c5c1689ec57250");
-const index = client.initIndex("blog_search");
+const client = algoliasearch(process.env.ALGOLIA_APP, process.env.ALGOLIA_SEARCH_KEY);
+const index = client.initIndex(process.env.ALGOLIA_INDEX);
 
 
 module.exports = function(eleventyConfig) {
