@@ -13,3 +13,5 @@ The site requires an [Algolia account](https://www.algolia.com/?utm_source=socia
 Clone the repository and run `npm install`.
 
 From there, convert the .env.test file to just `.env` and replace the variables with your App ID, Search-only API key and index name.
+
+Run `npm start` to locally run the project.
